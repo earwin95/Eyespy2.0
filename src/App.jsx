@@ -1,28 +1,20 @@
-import { BrowserRouter, Routes, Route } from 'react-router'
-import { div } from '@tensorflow/tfjs'
-import './App.css'
-import Header from './Components/Header'
-import Footer from './Components/Footer'
-import Historique from './Pages/Historique'
-import Home from './Pages/Home'
-import NotFound from './Pages/NotFound'
-
+import React from 'react';
+import { BrowserRouter, Routes, Route } from 'react-router';
+import Header from './components/Header';
+import Home from './pages/Home';
+import DetectionPage from './pages/DetectionPage';
+import GalleryPage from './pages/GalleryPage';
 
 function App() {
-
-
   return (
     <BrowserRouter>
-    <Header/>
-    <Routes>
-    <Route path='/' element={<Home />} />
-    <Route path='/Historique' element={<Historique />} />
-    <Route path='/NotFound' element={<NotFound />} />
-    </Routes>
-    <Footer/>
+      <Header />
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/detect" element={<DetectionPage />} />
+        <Route path="/gallery" element={<GalleryPage />} />
+      </Routes>
     </BrowserRouter>
-
-
   );
 }
 
