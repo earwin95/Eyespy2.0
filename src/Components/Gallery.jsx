@@ -1,4 +1,9 @@
 import { useState, useEffect } from "react";
+// fonction qui nous permet de recuperer les captures d images dans le local storage et de les afficher 
+// dans la galerie
+// on utilise useState pour gerer l etat de la galerie et useEffect pour recuperer les donnees du local storage : 
+// on utilise JSON.parse pour convertir les donnees en format JSON en un tableau d objets javascript et localStorage.getItem pour recuperer les donnees du local storage
+// on utilise map pour parcourir le tableau et afficher chaque image avec sa date et les objets detectes
 
 const Gallery = () => {
     const [captures, setCaptures] = useState([]);

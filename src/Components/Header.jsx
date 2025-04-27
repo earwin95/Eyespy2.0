@@ -1,5 +1,8 @@
 import { Link } from 'react-router';
 
+// creation du composant Header qui met en place la barre de navigation et le titre de l application
+// on utilise  Link to pour naviguer vers les pages de detaction et la gallerie
+
 const Header = () => (
   <header className="bg-white shadow p-4 flex justify-between items-center">
     <h1 className="text-xl font-bold text-green-600">🎯 EyeSpy</h1>
