@@ -30,13 +30,13 @@ const ObjectDetection = () => {
   const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
-    const loadModel = async () => {
-      setIsLoading(true);
-      const loadedModel = await cocoSsd.load();
-      setModel(loadedModel);
-      setIsLoading(false);
-    };
-    loadModel();
+    // const loadModel = async () => {
+    //   setIsLoading(true);
+    //   const loadedModel = await cocoSsd.load();
+    //   setModel(loadedModel);
+    //   setIsLoading(false);
+    // };
+    // loadModel();
   }, []);
 
 // on crée une fonction drawBoxes qui va dessiner les carrés de détection sur les objets détectés :
@@ -80,6 +80,7 @@ const ObjectDetection = () => {
       ctx.fillText(label, x + 5, y - 7);
     });
   };
+
 
   // on utilise useEffect pour mettre à jour les détections toutes les 500ms
 
@@ -147,7 +148,7 @@ const ObjectDetection = () => {
   };
 
   return (
-    <div className=" pb-12 bg-gradient-to-b from-gray-50 to-gray-100">
+    <div className=" pb-12">
       <div className="container-page">
         <div className="text-center max-w-4xl mx-auto">
           <h1 className="text-4xl md:text-5xl font-bold text-blue-800 mb-8 tracking-tight animate-fade-in">
@@ -158,7 +159,7 @@ const ObjectDetection = () => {
           <div className="mb-6 animate-fade-in flex justify-center space-x-4">
             {isLoading ? (
               <div className="flex items-center justify-center">
-                <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-blue-700"></div>
+                <div className="animate-spin  h-8 w-8 border-b-2 border-blue-700"></div>
                 <span className="ml-2 text-gray-600">Loading model...</span>
               </div>
             ) : !videoEnabled ? (
@@ -188,7 +189,7 @@ const ObjectDetection = () => {
           <Dialog open={isOpen} onClose={() => setIsOpen(false)} className="relative z-50">
             <div className="fixed inset-0 bg-black/30" aria-hidden="true" />
             <div className="fixed inset-0 flex items-center justify-center p-4">
-              <Dialog.Panel className="bg-white rounded-xl p-6 space-y-4 shadow-xl max-w-sm w-full">
+              <Dialog.Panel className="bg-white  p-6 space-y-4 shadow-xl max-w-sm w-full">
                 <Dialog.Title className="text-lg font-bold text-gray-800">
                   📸 Capturer une image
                 </Dialog.Title>
@@ -197,7 +198,7 @@ const ObjectDetection = () => {
                 <div className="flex justify-end space-x-2">
                   <button
                     onClick={() => setIsOpen(false)}
-                    className="px-4 py-2 bg-gray-300 rounded hover:bg-gray-400 transition-colors"
+                    className="px-4 py-2 bg-gray-300  hover:bg-gray-400 transition-colors"
                   >
                     OK
                   </button>
@@ -242,7 +243,7 @@ const ObjectDetection = () => {
                 {detections.map((item, index) => (
                   <span
                     key={index}
-                    className="px-3 py-1 bg-blue-100 text-blue-800 rounded-full text-sm"
+                    className="px-3 py-1 bg-blue-100 text-blue-800 text-sm"
                   >
                     {item.class} ({Math.round(item.score * 100)}%)
                   </span>
