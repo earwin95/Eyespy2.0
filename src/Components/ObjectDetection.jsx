@@ -8,6 +8,8 @@ import * as cocoSsd from '@tensorflow-models/coco-ssd';
 import '@tensorflow/tfjs';
 // On crée la fonction ObjectDetection qui va gérer la détection d'objets  
 import { Camera, X } from 'lucide-react';
+import CaptureModal from './CaptureModal'
+import { Dialog } from "@headlessui/react";
 
 const ObjectDetection = () => {
 // On crée les variables
@@ -19,6 +21,8 @@ const ObjectDetection = () => {
   const canvasRef = useRef(null);
   const [model, setModel] = useState(null);
   const [detections, setDetections] = useState([]);
+  const [isOpen, setIsOpen] = useState(false);
+
 
     // on utilise useEffect pour charger le modèle d'IA coco-ssd une seule fois 
   // On telecharge cooco-ssd et on le set dans la variable model 
@@ -137,7 +141,9 @@ const ObjectDetection = () => {
     const oldCaptures = JSON.parse(localStorage.getItem('captures')) || [];
     oldCaptures.push(captureData);
     localStorage.setItem('captures', JSON.stringify(oldCaptures));
-    alert('Capture sauvegardée !');
+
+    setIsOpen(true);
+    
   };
 
   return (
@@ -175,16 +181,30 @@ const ObjectDetection = () => {
             )}
 
             {videoEnabled && (
-              <button
-                onClick={capture}
-                className="bg-blue-600 text-white p-4 rounded-full hover:bg-blue-700 transition-colors duration-300"
-                aria-label="Take snapshot"
-              >
-                <Camera size={24} />
-              </button>
+            
+              <CaptureModal videoEnabled={videoEnabled} capture={capture} />
             )}
           </div>
-
+          <Dialog open={isOpen} onClose={() => setIsOpen(false)} className="relative z-50">
+            <div className="fixed inset-0 bg-black/30" aria-hidden="true" />
+            <div className="fixed inset-0 flex items-center justify-center p-4">
+              <Dialog.Panel className="bg-white rounded-xl p-6 space-y-4 shadow-xl max-w-sm w-full">
+                <Dialog.Title className="text-lg font-bold text-gray-800">
+                  📸 Capturer une image
+                </Dialog.Title>
+                <p className="text-gray-600">Capture sauvegardée !</p>
+    
+                <div className="flex justify-end space-x-2">
+                  <button
+                    onClick={() => setIsOpen(false)}
+                    className="px-4 py-2 bg-gray-300 rounded hover:bg-gray-400 transition-colors"
+                  >
+                    OK
+                  </button>
+                </div>
+              </Dialog.Panel>
+            </div>
+          </Dialog>
           <div className="flex justify-center items-center w-full">
             <div className="card relative w-full max-w-[700px] h-[550px]">
               {!videoEnabled ? (
