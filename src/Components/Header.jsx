@@ -38,6 +38,7 @@ const Header = ({ darkMode, toggleDarkMode }) => {
       <div className="max-w-7xl mx-auto flex justify-between items-center relative">
         {/* Logo */}
         <div className="flex items-center space-x-3">
+        <a href="/" class="">
           <img 
             src={darkMode ? logoDark : logoLight} 
             alt="Logo" 
@@ -46,6 +47,7 @@ const Header = ({ darkMode, toggleDarkMode }) => {
           <span className={`text-2xl font-bold ${darkMode ? 'text-white' : 'text-blue-500'}`}>
             EyeSpy
           </span>
+        </a>
         </div>
 
         {/* Desktop Navigation */}

@@ -30,13 +30,13 @@ const ObjectDetection = () => {
   const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
-    // const loadModel = async () => {
-    //   setIsLoading(true);
-    //   const loadedModel = await cocoSsd.load();
-    //   setModel(loadedModel);
-    //   setIsLoading(false);
-    // };
-    // loadModel();
+    const loadModel = async () => {
+      setIsLoading(true);
+      const loadedModel = await cocoSsd.load();
+      setModel(loadedModel);
+      setIsLoading(false);
+    };
+    loadModel();
   }, []);
 
 // on crée une fonction drawBoxes qui va dessiner les carrés de détection sur les objets détectés :
