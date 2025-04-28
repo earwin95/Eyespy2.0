@@ -1,6 +1,3 @@
-//  on met en place les imports nécessaires et on importe les composants Header, Home, DetectionPage et GalleryPage
-// on utilise react-router pour mettre en place la structure de navigation
-
 import React, { useState, useEffect } from 'react';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import Header from './Components/Header';
@@ -9,34 +6,39 @@ import DetectionPage from './pages/DetectionPage';
 import GalleryPage from './pages/GalleryPage';
 
 function App() {
+  // Lecture de la préférence de mode sombre depuis localStorage
   const storedMode = localStorage.getItem('darkMode');
   const [darkMode, setDarkMode] = useState(storedMode === 'true');
 
+  // Fonction pour basculer entre le mode sombre et clair
   const toggleDarkMode = () => {
-    setDarkMode(prevMode => {
+    setDarkMode((prevMode) => {
       const newMode = !prevMode;
-      localStorage.setItem('darkMode', newMode);
+      localStorage.setItem('darkMode', newMode); // Sauvegarder l'état dans localStorage
       return newMode;
     });
   };
 
-  // Appliquer la classe dark uniquement au Header
+  // Appliquer la classe dark au document/html global
   useEffect(() => {
     if (darkMode) {
-      document.documentElement.classList.add('dark');
+      document.documentElement.classList.add('dark'); // Ajoute la classe 'dark' à l'élément <html>
     } else {
-      document.documentElement.classList.remove('dark');
+      document.documentElement.classList.remove('dark'); // Retire la classe 'dark'
     }
   }, [darkMode]);
 
   return (
     <BrowserRouter>
+      {/* Passer le mode sombre et la fonction toggleDarkMode au Header */}
       <Header darkMode={darkMode} toggleDarkMode={toggleDarkMode} />
+      
       <div className="">
+        {/* Définir les routes de navigation */}
         <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/detect" element={<DetectionPage />} />
-          <Route path="/gallery" element={<GalleryPage />} />
+          <Route path="/" element={<Home darkMode={darkMode} />} />
+          <Route path="/detect" element={<DetectionPage darkMode={darkMode} />} />
+          <Route path="/gallery" element={<GalleryPage darkMode={darkMode} />} />
         </Routes>
       </div>
     </BrowserRouter>
